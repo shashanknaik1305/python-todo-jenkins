@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     tools {
-        sonarQubeScanner 'SonarQubeScanner' 
+        // Use the correct tool type from the error message
+        hudson.plugins.sonar.SonarRunnerInstallation 'SonarQubeScanner' 
     }
     
     stages {
@@ -24,7 +25,6 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('MySonarQubeServer') {
-                    // No need for additional parameters - sonar-project.properties will be used automatically
                     sh 'sonar-scanner -Dsonar.login=$SONARQUBE'
                 }
             }
