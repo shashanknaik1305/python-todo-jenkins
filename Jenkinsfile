@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarRunner 'SonarScanner' // same name as configured in Jenkins Tools
+        sonarQubeScanner 'SonarScanner'   // ✅ This is the correct key for the SonarQube Scanner plugin
     }
 
     stages {
@@ -19,12 +19,9 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            environment {
-                SONARQUBE = credentials('sonarqube-token') // Jenkins credential ID you created
-            }
             steps {
                 withSonarQubeEnv('MySonarQubeServer') {
-                    sh 'sonar-scanner -Dsonar.login=$SONARQUBE'
+                    sh 'sonar-scanner'
                 }
             }
         }
@@ -38,3 +35,4 @@ pipeline {
         }
     }
 }
+
