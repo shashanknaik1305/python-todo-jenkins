@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     tools {
-        sonarQube 'SonarQubeScanner'   // ✅ This is the correct key for the SonarQube Scanner plugin
+        sonarQubeScanner 'SonarQubeScanner' 
     }
-
+    
     stages {
         stage('Checkout') {
             steps {
@@ -19,9 +19,13 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
+            environment {
+                SONARQUBE = credentials('sonar-token')
+            }
             steps {
                 withSonarQubeEnv('MySonarQubeServer') {
-                    sh 'sonar-scanner'
+                    // No need for additional parameters - sonar-project.properties will be used automatically
+                    sh 'sonar-scanner -Dsonar.login=$SONARQUBE'
                 }
             }
         }
@@ -35,4 +39,3 @@ pipeline {
         }
     }
 }
-
