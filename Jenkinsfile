@@ -8,6 +8,17 @@ pipeline {
             }
         }
 
+        stage('Install pip') {
+            steps {
+                sh '''
+                    # Install pip for Python3
+                    sudo yum install -y python3-pip
+                    # Verify pip installation
+                    python3 -m pip --version
+                '''
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 sh 'python3 -m pip install -r requirements.txt'
