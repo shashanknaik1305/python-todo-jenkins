@@ -1,10 +1,5 @@
 pipeline {
     agent any
-
-    tools {
-        // Use the correct tool type from the error message
-        hudson.plugins.sonar.SonarRunnerInstallation 'SonarQubeScanner' 
-    }
     
     stages {
         stage('Checkout') {
@@ -25,7 +20,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('MySonarQubeServer') {
-                    sh 'sonar-scanner -Dsonar.login=$SONARQUBE'
+                    sh '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/bin/sonar-scanner -Dsonar.login=$SONARQUBE'
                 }
             }
         }
