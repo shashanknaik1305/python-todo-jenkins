@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarQubeScanner 'SonarScanner'   // ✅ This is the correct key for the SonarQube Scanner plugin
+        sonarQube 'SonarQubeScanner'   // ✅ This is the correct key for the SonarQube Scanner plugin
     }
 
     stages {
