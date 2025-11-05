@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarQube 'SonarScanner' // same name as configured in Jenkins Tools
+        sonarScanner 'SonarScanner' // same name as configured in Jenkins Tools
     }
 
     stages {
